@@ -12,10 +12,12 @@ namespace aspnetcore.Controllers
 
         private readonly IInMemoryFiltering _inMemoryFiltering;
         private readonly IZipFiles _zipFiles;
-        public StudentController(IInMemoryFiltering inMemoryFiltering, IZipFiles zipFiles)
+        private readonly IFindText _findText;
+        public StudentController(IInMemoryFiltering inMemoryFiltering, IZipFiles zipFiles, IFindText findText)
         {
             _inMemoryFiltering = inMemoryFiltering;
             _zipFiles = zipFiles;
+            _findText = findText;
         }
         [HttpGet("GetStudents")]
         public List<Student> GetStudents()
@@ -28,6 +30,7 @@ namespace aspnetcore.Controllers
         [HttpGet("FindText")]
         public string FindText()
         {
+            var res = _findText.FindTheWordMuch();
             return "sdad";
 
         }
