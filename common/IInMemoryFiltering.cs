@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace common
 {
-    public class CarZ
+    public interface IInMemoryFiltering
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        List<Student> GetFilteredStudents();
     }
 }

@@ -5,9 +5,7 @@ VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetframework", "aspnetframework\aspnetframework.csproj", "{8B55C85E-3979-4731-A5DD-F46D08B3E917}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "common", "common\common.csproj", "{2E3B92B4-274B-44E8-9EA3-41ACBFC21917}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aspnetcore", "aspnetcore\aspnetcore.csproj", "{05FC28D5-5155-4BEB-AF7B-2DF5D67B0DB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aspnetcore", "aspnetcore\aspnetcore.csproj", "{05FC28D5-5155-4BEB-AF7B-2DF5D67B0DB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +17,6 @@ Global
 		{8B55C85E-3979-4731-A5DD-F46D08B3E917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B55C85E-3979-4731-A5DD-F46D08B3E917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B55C85E-3979-4731-A5DD-F46D08B3E917}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E3B92B4-274B-44E8-9EA3-41ACBFC21917}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E3B92B4-274B-44E8-9EA3-41ACBFC21917}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E3B92B4-274B-44E8-9EA3-41ACBFC21917}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E3B92B4-274B-44E8-9EA3-41ACBFC21917}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05FC28D5-5155-4BEB-AF7B-2DF5D67B0DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{05FC28D5-5155-4BEB-AF7B-2DF5D67B0DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05FC28D5-5155-4BEB-AF7B-2DF5D67B0DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU

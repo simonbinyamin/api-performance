@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using aspnetcore.Services;
+using common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aspnetcore.Controllers
@@ -8,11 +10,18 @@ namespace aspnetcore.Controllers
     public class StudentController : ControllerBase
     {
 
-
-        [HttpGet("GetStudents")]
-        public string GetStudents()
+        private readonly IInMemoryFiltering _inMemoryFiltering;
+        private readonly IZipFiles _zipFiles;
+        public StudentController(IInMemoryFiltering inMemoryFiltering, IZipFiles zipFiles)
         {
-            return "sdad";
+            _inMemoryFiltering = inMemoryFiltering;
+            _zipFiles = zipFiles;
+        }
+        [HttpGet("GetStudents")]
+        public List<Student> GetStudents()
+        {
+            var students = _inMemoryFiltering.GetFilteredStudents();
+            return students;
 
         }
 
@@ -26,6 +35,7 @@ namespace aspnetcore.Controllers
         [HttpGet("ZipFiles")]
         public string ZipFiles()
         {
+            var zipped = _zipFiles.CompressFiles();
             return "sdad";
 
         }
