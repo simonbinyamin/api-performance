@@ -1,10 +1,25 @@
-﻿using System.IO;
+﻿using common;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Reflection;
+using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace aspnetframework.Services
 {
     public class FindText: IFindText
     {
+        HttpClient httpClient;
+        public FindText()
+        {
+            httpClient = new HttpClient();
+        }
+
         public string FindTheWordMuch()
         {
             string readContents;
@@ -21,6 +36,106 @@ namespace aspnetframework.Services
                 return "Not found";
             }
 
+        }
+
+
+
+
+        public string StudentToString()
+        {
+            string serializedstudent = "";
+            foreach (var student in students())
+            {
+
+                string studentString = "";
+                using (var ms = new MemoryStream())
+                {
+                    DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(Student));
+                    serialiser.WriteObject(ms, student);
+                    byte[] json = ms.ToArray();
+                    studentString = Encoding.UTF8.GetString(json, 0, json.Length);
+                }
+
+                if (!string.IsNullOrEmpty(studentString))
+                {
+                    serializedstudent = studentString;
+                }
+            }
+            return serializedstudent;
+
+        }
+
+        public string PropertyFromObject()
+        {
+            var studentsHashMap = students().ToDictionary(item => item.id,
+                                       item => new { Property1 = item.id, Property2 = item.name });
+            //
+            string studentname = "";
+            foreach (var entry in studentsHashMap)
+            {
+                PropertyInfo property = ((dynamic)entry.Value).GetType().GetProperty("Property1");
+                var PropetyName = property.Name;
+                var PropetyValue = ((dynamic)entry.Value).GetType().GetProperty(property.Name).GetValue(((dynamic)entry.Value), null);
+
+                studentname = PropetyValue.ToString();
+            }
+
+
+
+            return studentname;
+        }
+
+        public string ReplaceChar()
+        {
+            string _str = "hello world from .NET!";
+            _str.Replace(".", ",");
+            return "sd";
+        }
+
+        public async Task<string> StudentNameAsync()
+        {
+
+            foreach (var student in students())
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    string resultContent = "";
+
+                    HttpResponseMessage response = await httpClient.GetAsync("https://randomuser.me/api/");
+
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        resultContent = await response.Content.ReadAsStringAsync();
+                    }
+
+                    var json = JObject.Parse(resultContent);
+                    var email = json?["results"]?[0]?["email"];
+
+                    if (email != null)
+                    {
+                        student.name = email.ToString();
+                    }
+
+                    return resultContent;
+                }
+            }
+            return "done";
+
+        }
+        private Student[] students()
+        {
+            var students = new Student[20000];
+            for (int i = 0; i < 20000; i++)
+            {
+                students[i] = new Student
+                {
+                    id = i,
+                    name = Guid.NewGuid().ToString()
+                };
+
+            }
+            return students;
         }
     }
 }
