@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace aspnetframework.Controllers
 {
@@ -16,10 +18,10 @@ namespace aspnetframework.Controllers
         {
             _zipFiles = new ZipFiles();
         }
-        public string Get()
+        public string GetAsync()
         {
-            _zipFiles.CompressFiles();
-            return "value3";
+           var t = _zipFiles.CompressFilesAsync();
+            return "";
         }
 
 

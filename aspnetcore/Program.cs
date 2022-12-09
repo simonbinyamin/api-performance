@@ -13,6 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IInMemoryFiltering, InMemoryFiltering>();
 builder.Services.AddScoped<IZipFiles, ZipFiles>();
 builder.Services.AddScoped<IFindText, FindText>();
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,5 +31,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseStaticFiles();
 
 app.Run();

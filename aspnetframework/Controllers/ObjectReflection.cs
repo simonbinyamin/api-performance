@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace aspnetframework.Controllers
@@ -19,7 +20,7 @@ namespace aspnetframework.Controllers
 
         public string Get()
         {
-            var obj =_findText.PropertyFromObject();
+            var obj = _findText.PropertyFromObject();
             return obj;
         }
 

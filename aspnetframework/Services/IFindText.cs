@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace aspnetframework.Services
 {
     public interface IFindText
     {
-        string FindTheWordMuch();
-        string ReplaceChar();
+        ActionResult FindTheWordMuch();
         string PropertyFromObject();
         string StudentToString();
-        Task<string> StudentNameAsync();
+       
     }
 }

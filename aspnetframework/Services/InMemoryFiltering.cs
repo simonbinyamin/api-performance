@@ -12,35 +12,52 @@ namespace aspnetframework.Services
 
         public List<Student> GetFilteredStudents()
         {
-            var reversed = students().Reverse().ToList();
+           Student[] students = new Student[] {};
 
+            if (students.Length == 0)
+            {
+                students = GenerateRandomStudents();
+            }
 
-            reversed.Sort(
-                delegate (Student p1, Student p2)
+            Array.Sort(students, delegate (Student user1, Student user2) {
+                return user1.score.CompareTo(user2.score);
+            });
+
+            int highestScore = students[students.Length - 1].score;
+            var studentsHighestScore = new List<Student>();
+
+            for (int i = students.Length - 1; i > 0; i--)
+            {
+                if (students[i].score == highestScore)
                 {
-                    return p1.id.CompareTo(p2.id);
+                    studentsHighestScore.Add(students[i]);
                 }
-            );
+                else
+                {
+                    break;
+                }
+            }
 
-
-            return reversed;
+            return studentsHighestScore;
 
         }
 
-        private Student[] students()
+        private Student[] GenerateRandomStudents()
         {
-            var students = new Student[20000];
-            for (int i = 0; i < 20000; i++)
+            var students = new Student[100];
+            for (int i = 0; i < 100; i++)
             {
                 students[i] = new Student
                 {
                     id = i,
-                    name = Guid.NewGuid().ToString()
+                    name = Guid.NewGuid().ToString(),
+                    score = i+1
                 };
 
             }
             return students;
         }
+
 
     }
 

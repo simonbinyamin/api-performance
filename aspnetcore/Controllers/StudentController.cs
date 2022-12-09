@@ -19,7 +19,13 @@ namespace aspnetcore.Controllers
             _zipFiles = zipFiles;
             _findText = findText;
         }
-        [HttpGet("jjjj")]
+
+
+        [HttpGet("Void")]
+        public int Void() { return 0; }
+
+
+        [HttpGet("GetStudents")]
         public List<Student> GetStudents()
         {
             var students = _inMemoryFiltering.GetFilteredStudents();
@@ -27,7 +33,7 @@ namespace aspnetcore.Controllers
 
         }
 
-        [HttpGet("ffff")]
+        [HttpGet("FindText")]
         public string FindText()
         {
             var res = _findText.FindTheWordMuch();
@@ -35,7 +41,7 @@ namespace aspnetcore.Controllers
 
         }
 
-        [HttpGet("sdsd")]
+        [HttpGet("ZipFiles")]
         public string ZipFiles()
         {
             var zipped = _zipFiles.CompressFiles();
@@ -53,7 +59,7 @@ namespace aspnetcore.Controllers
         }
 
 
-        [HttpGet("dsdsdaaaas")]
+        [HttpGet("ObjectReflection")]
         public string ObjectReflection()
         {
             var prop = _findText.PropertyFromObject();
@@ -62,7 +68,7 @@ namespace aspnetcore.Controllers
         }
 
 
-        [HttpGet("hjkkaskksda")]
+        [HttpGet("StudentSerializer")]
         public string StudentSerializer()
         {
             var student = _findText.StudentToString();
@@ -70,17 +76,11 @@ namespace aspnetcore.Controllers
 
         }
 
-        [HttpGet("GetStudents")]
+        [HttpGet("TaskAsync")]
         public async Task TaskAsync()
         {
             var r = await _findText.StudentNameAsync();
-
-
-
-        
         }
-
-
 
 
 

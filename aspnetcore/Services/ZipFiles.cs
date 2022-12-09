@@ -8,8 +8,9 @@ namespace aspnetcore.Services
 
         public string CompressFiles()
         {
+ 
             Guid _id = Guid.NewGuid();
-            using (ZipArchive zip = ZipFile.Open(@"c:\testcase-output\"+_id+".zip", ZipArchiveMode.Create))
+            using (ZipArchive zip = ZipFile.Open(@"c:\testcase-output\" + _id + ".zip", ZipArchiveMode.Create))
             {
                 zip.CreateEntryFromFile(@"c:\testcase\something.txt", "data/path/something.txt");
                 zip.CreateEntryFromFile(@"c:\testcase\something2.txt", "data/path/something2.txt");
@@ -21,3 +22,10 @@ namespace aspnetcore.Services
 }
 
 
+//Guid _id = Guid.NewGuid();
+//using (ZipArchive zip = ZipFile.Open(@"testcase-output\"+_id+".zip", ZipArchiveMode.Create))
+//{
+//    zip.CreateEntryFromFile(@"something.txt", "data/path/something.txt");
+//    zip.CreateEntryFromFile(@"something2.txt", "data/path/something2.txt");
+//}
+//return "";

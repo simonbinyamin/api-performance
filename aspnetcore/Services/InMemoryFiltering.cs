@@ -11,34 +11,58 @@ namespace common
 
         public List<Student> GetFilteredStudents()
         {
-            var reversed = students().Reverse().ToList();
+            var students = new List<Student>();
 
+            if (students.Count == 0)
+            {
+                students = GenerateRandomStudents();
+            }
 
-            reversed.Sort(
+            students.Sort(
                 delegate (Student p1, Student p2)
                 {
-                    return p1.id.CompareTo(p2.id);
+                    return p1.score.CompareTo(p2.score);
                 }
             );
 
 
-            return reversed;
+       
+
+
+
+            int highestScore = students[students.Count - 1].score;
+            var studentsHighestScore = new List<Student>();
+
+            for (int i = students.Count - 1; i > 0; i--)
+            {
+                if (students[i].score == highestScore)
+                {
+                    studentsHighestScore.Add(students[i]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return studentsHighestScore;
 
         }
 
-        private Student[] students()
+        private List<Student> GenerateRandomStudents()
         {
-            var students = new Student[20000];
-            for (int i = 0; i < 20000; i++)
+            var students = new Student[100];
+            for (int i = 0; i < 100; i++)
             {
                 students[i] = new Student
                 {
                     id = i,
-                    name = Guid.NewGuid().ToString()
+                    name = Guid.NewGuid().ToString(),
+                    score = new Random().Next(1,99)
                 };
 
             }
-            return students;
+            return students.ToList();
         }
 
     }

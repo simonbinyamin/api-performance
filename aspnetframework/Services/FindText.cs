@@ -4,36 +4,60 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace aspnetframework.Services
 {
-    public class FindText: IFindText
+    public class FindText : IFindText
     {
-        HttpClient httpClient;
+
+
+        private static string resultContent = String.Empty;
         public FindText()
         {
-            httpClient = new HttpClient();
+
         }
 
-        public string FindTheWordMuch()
+        public ActionResult FindTheWordMuch()
         {
-            string readContents;
-            using (StreamReader streamReader = new StreamReader(@"c:\testcase\huge.txt", Encoding.UTF8))
+            try
             {
-                readContents = streamReader.ReadToEnd();
+                HttpStatusCodeResult httpStatusCodeResult = null;
+                string line;
+                string word;
+
+                using (StreamReader streamReader = new StreamReader(@"c:\testcase\huge.txt", Encoding.UTF8))
+                {
+                    while ((line = streamReader.ReadLine()) != null)
+                    {
+
+                        int index = line.IndexOf("Much");
+
+                        if (index != -1)
+                        {
+                            word = line.Substring(index, 5);
+                            if (!string.IsNullOrEmpty(word))
+                            {
+                                word.Replace(".", ",");
+                                break;
+                            }
+                        }
+
+                    } 
+                }
+
+                return httpStatusCodeResult = new HttpStatusCodeResult(HttpStatusCode.OK, "Replaced");
             }
-            if (readContents.Contains("Much") == true)
+            catch (FileNotFoundException)
             {
-                return "Found";
-            }
-            else
-            {
-                return "Not found";
+                return new HttpNotFoundResult();
             }
 
         }
@@ -43,8 +67,42 @@ namespace aspnetframework.Services
 
         public string StudentToString()
         {
+
+            if (string.IsNullOrEmpty(resultContent))
+            {
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://localhost:3333/Data/Studentjson");
+                request.Method = "GET";
+                request.ContentType = "application/json";
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    Stream dataStream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(dataStream);
+
+                    resultContent = reader.ReadToEnd();
+
+                    reader.Close();
+                    dataStream.Close();
+                }
+
+            }
+
             string serializedstudent = "";
-            foreach (var student in students())
+            Student student;
+
+
+            var jobject = JObject.Parse(resultContent);
+            var getName = jobject?["results"]?["name"];
+            var getEmail = jobject?["results"]?["email"];
+
+            student = new Student
+            {
+                email = getEmail.ToString(),
+                name = getName.ToString(),
+
+            };
+
+            if (jobject != null)
             {
 
                 string studentString = "";
@@ -60,82 +118,63 @@ namespace aspnetframework.Services
                 {
                     serializedstudent = studentString;
                 }
+
             }
+
             return serializedstudent;
 
+
+
+
+
+
         }
+
 
         public string PropertyFromObject()
         {
-            var studentsHashMap = students().ToDictionary(item => item.id,
-                                       item => new { Property1 = item.id, Property2 = item.name });
-            //
-            string studentname = "";
-            foreach (var entry in studentsHashMap)
+            if (string.IsNullOrEmpty(resultContent))
             {
-                PropertyInfo property = ((dynamic)entry.Value).GetType().GetProperty("Property1");
-                var PropetyName = property.Name;
-                var PropetyValue = ((dynamic)entry.Value).GetType().GetProperty(property.Name).GetValue(((dynamic)entry.Value), null);
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://localhost:3333/Data/Studentjson");
+                request.Method = "GET";
+                request.ContentType = "application/json";
 
-                studentname = PropetyValue.ToString();
-            }
-
-
-
-            return studentname;
-        }
-
-        public string ReplaceChar()
-        {
-            string _str = "hello world from .NET!";
-            _str.Replace(".", ",");
-            return "sd";
-        }
-
-        public async Task<string> StudentNameAsync()
-        {
-
-            foreach (var student in students())
-            {
-                using (HttpClient httpClient = new HttpClient())
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
-                    string resultContent = "";
+                    Stream dataStream = response.GetResponseStream();
+                    StreamReader reader = new StreamReader(dataStream);
 
-                    HttpResponseMessage response = await httpClient.GetAsync("https://randomuser.me/api/");
+                    resultContent = reader.ReadToEnd();
 
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        resultContent = await response.Content.ReadAsStringAsync();
-                    }
-
-                    var json = JObject.Parse(resultContent);
-                    var email = json?["results"]?[0]?["email"];
-
-                    if (email != null)
-                    {
-                        student.name = email.ToString();
-                    }
-
-                    return resultContent;
+                    reader.Close();
+                    dataStream.Close();
                 }
-            }
-            return "done";
 
-        }
-        private Student[] students()
-        {
-            var students = new Student[20000];
-            for (int i = 0; i < 20000; i++)
+            }
+
+            var jobject = JObject.Parse(resultContent);
+            var getName = jobject?["results"]?["name"];
+
+
+            dynamic student = new
             {
-                students[i] = new Student
-                {
-                    id = i,
-                    name = Guid.NewGuid().ToString()
-                };
+                name = getName.ToString(),
 
-            }
-            return students;
+            };
+
+            PropertyInfo property = student.GetType().GetProperty("name");
+            var PropetyName = property.Name;
+            var PropetyValue = student.GetType().GetProperty(property.Name).GetValue(student, null);
+            return PropetyValue.ToString();
+
+  
         }
+
+        
+
+
+
+
+
     }
 }

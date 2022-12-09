@@ -20,15 +20,15 @@ namespace aspnetframework.Controllers
             _zipFiles = new ZipFiles();
             _findText = new FindText();
         }
-        public string Get()
+        public List<Student> Get()
         {
-            //var tB = _inMemoryFiltering.GetFilteredStudents();
+            var tB = _inMemoryFiltering.GetFilteredStudents();
             // var t = _findText.FindTheWordMuch();
             //var obj = _findText.PropertyFromObject();
             //var repl = _findText.ReplaceChar();
             //var str = _findText.StudentToString();
-            _zipFiles.CompressFiles();
-            return "value";
+
+            return tB;
         }
     }
 }
