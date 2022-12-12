@@ -9,31 +9,24 @@ namespace common
     public class InMemoryFiltering: IInMemoryFiltering
     {
 
+
         public List<Student> GetFilteredStudents()
         {
-            var students = new List<Student>();
+            Student[] students = new Student[] { };
 
-            if (students.Count == 0)
+            if (students.Length == 0)
             {
                 students = GenerateRandomStudents();
             }
 
-            students.Sort(
-                delegate (Student p1, Student p2)
-                {
-                    return p1.score.CompareTo(p2.score);
-                }
-            );
+            Array.Sort(students, delegate (Student user1, Student user2) {
+                return user1.score.CompareTo(user2.score);
+            });
 
-
-       
-
-
-
-            int highestScore = students[students.Count - 1].score;
+            int highestScore = students[students.Length - 1].score;
             var studentsHighestScore = new List<Student>();
 
-            for (int i = students.Count - 1; i > 0; i--)
+            for (int i = students.Length - 1; i > 0; i--)
             {
                 if (students[i].score == highestScore)
                 {
@@ -49,7 +42,7 @@ namespace common
 
         }
 
-        private List<Student> GenerateRandomStudents()
+        private Student[] GenerateRandomStudents()
         {
             var students = new Student[100];
             for (int i = 0; i < 100; i++)
@@ -58,14 +51,17 @@ namespace common
                 {
                     id = i,
                     name = Guid.NewGuid().ToString(),
-                    score = new Random().Next(1,99)
+                    score = i + 1
                 };
 
             }
-            return students.ToList();
+            return students;
         }
 
     }
 
    
 }
+
+
+

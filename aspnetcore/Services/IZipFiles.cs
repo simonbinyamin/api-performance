@@ -1,7 +1,9 @@
-﻿namespace aspnetcore.Services
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace aspnetcore.Services
 {
     public interface IZipFiles
     {
-        string CompressFiles();
+        Task<ActionResult> CompressFilesAsync();
     }
 }

@@ -22,7 +22,7 @@ namespace aspnetcore.Controllers
 
 
         [HttpGet("Void")]
-        public int Void() { return 0; }
+        public bool Void() { return true; }
 
 
         [HttpGet("GetStudents")]
@@ -50,13 +50,6 @@ namespace aspnetcore.Controllers
         }
 
 
-        [HttpGet("zxcxzcz")]
-        public string ReplaceText()
-        {
-            var replace = _findText.ReplaceChar();
-            return replace;
-
-        }
 
 
         [HttpGet("ObjectReflection")]
@@ -76,11 +69,6 @@ namespace aspnetcore.Controllers
 
         }
 
-        [HttpGet("TaskAsync")]
-        public async Task TaskAsync()
-        {
-            var r = await _findText.StudentNameAsync();
-        }
 
 
 
