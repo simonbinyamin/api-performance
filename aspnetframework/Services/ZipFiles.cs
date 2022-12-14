@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
@@ -10,33 +11,30 @@ namespace aspnetframework.Services
     public class ZipFiles: IZipFiles
     {
 
-        private static byte[] byteFile;
-        public async Task<ActionResult> CompressFilesAsync()
+        public static byte[] byteFile;
+        public async Task<ActionResult> CompressFiles()
         {
             Guid _id = Guid.NewGuid();
-            
+
             if (byteFile == null)
             {
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    byteFile = await httpClient.GetByteArrayAsync(@"http://localhost:3333/file/00.txt");
+                    byteFile = await httpClient.GetByteArrayAsync(@"http://localhost:3333/file/00.txt").ConfigureAwait(false);
 
                 }
             }
 
             using (var compressedFileStream = new MemoryStream())
             {
-                //Create an archive and store the stream in memory.
+                //using (ZipArchive zipArchive = ZipFile.Open(@"c:\testcase-output\" + _id + ".zip", ZipArchiveMode.Create))
                 using (var zipArchive = new ZipArchive(compressedFileStream, ZipArchiveMode.Create))
                 {
-                    //Create a zip entry for each attachment
                     var zipEntry = zipArchive.CreateEntry("File.txt");
 
-                    //Get the stream of the attachment
                     using (var originalFileStream = new MemoryStream(byteFile))
                     using (var zipEntryStream = zipEntry.Open())
                     {
-                        //Copy the attachment stream to the zip entry stream
                         originalFileStream.CopyTo(zipEntryStream);
                     }
                 }

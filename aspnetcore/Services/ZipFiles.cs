@@ -8,7 +8,7 @@ namespace aspnetcore.Services
 
 
         private static byte[] byteFile;
-        public async Task<ActionResult> CompressFilesAsync()
+        public async Task<ActionResult> CompressFiles()
         {
             Guid _id = Guid.NewGuid();
 
@@ -23,17 +23,14 @@ namespace aspnetcore.Services
 
             using (var compressedFileStream = new MemoryStream())
             {
-                //Create an archive and store the stream in memory.
+                //using (ZipArchive zipArchive = ZipFile.Open(@"c:\testcase-output\" + _id + ".zip", ZipArchiveMode.Create))
                 using (var zipArchive = new ZipArchive(compressedFileStream, ZipArchiveMode.Create))
                 {
-                    //Create a zip entry for each attachment
                     var zipEntry = zipArchive.CreateEntry("File.txt");
 
-                    //Get the stream of the attachment
                     using (var originalFileStream = new MemoryStream(byteFile))
                     using (var zipEntryStream = zipEntry.Open())
                     {
-                        //Copy the attachment stream to the zip entry stream
                         originalFileStream.CopyTo(zipEntryStream);
                     }
                 }

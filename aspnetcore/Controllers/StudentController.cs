@@ -13,16 +13,21 @@ namespace aspnetcore.Controllers
         private readonly IInMemoryFiltering _inMemoryFiltering;
         private readonly IZipFiles _zipFiles;
         private readonly IFindText _findText;
-        public StudentController(IInMemoryFiltering inMemoryFiltering, IZipFiles zipFiles, IFindText findText)
+        private readonly IStudentSerializer _studentSerializer;
+        private readonly IReflectionReader _reflectionReader;
+
+        public StudentController(IInMemoryFiltering inMemoryFiltering, IZipFiles zipFiles, IFindText findText, IStudentSerializer studentSerializer, IReflectionReader reflectionReader)
         {
             _inMemoryFiltering = inMemoryFiltering;
             _zipFiles = zipFiles;
             _findText = findText;
+            _studentSerializer = studentSerializer;
+            _reflectionReader = reflectionReader;
         }
 
 
-        [HttpGet("Void")]
-        public bool Void() { return true; }
+        [HttpGet("Empty")]
+        public bool Empty() { return true; }
 
 
         [HttpGet("GetStudents")]
@@ -36,26 +41,24 @@ namespace aspnetcore.Controllers
         [HttpGet("FindText")]
         public string FindText()
         {
-            var res = _findText.FindTheWordMuch();
-            return "sdad";
+            _findText.FindTheWordMuch();
+            return "Replaced";
 
         }
 
         [HttpGet("ZipFiles")]
         public string ZipFiles()
         {
-            var zipped = _zipFiles.CompressFiles();
-            return "sdad";
+            _zipFiles.CompressFiles();
+            return "Created";
 
         }
-
-
 
 
         [HttpGet("ObjectReflection")]
         public string ObjectReflection()
         {
-            var prop = _findText.PropertyFromObject();
+            var prop = _reflectionReader.PropertyFromObject();
             return prop;
 
         }
@@ -64,7 +67,7 @@ namespace aspnetcore.Controllers
         [HttpGet("StudentSerializer")]
         public string StudentSerializer()
         {
-            var student = _findText.StudentToString();
+            var student = _studentSerializer.StudentToString();
             return student;
 
         }

@@ -11,17 +11,17 @@ namespace aspnetframework.Controllers
 {
     public class StudentSerializerController : ApiController
     {
-        private readonly IFindText _findText;
+        private readonly IStudentSerializer _studentSerializer;
         public StudentSerializerController()
         {
-            _findText = new FindText();
+            _studentSerializer = new StudentSerializer();
 
         }
 
         public string Get()
         {
-            var str = _findText.StudentToString();
-            return str;
+            var student = _studentSerializer.StudentToString();
+            return student;
         }
 
 

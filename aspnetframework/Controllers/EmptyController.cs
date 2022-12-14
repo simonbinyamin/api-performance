@@ -9,10 +9,10 @@ using System.Web.Http;
 
 namespace aspnetframework.Controllers
 {
-    public class VoidController : ApiController
+    public class EmptyController : ApiController
     {
         
-        public VoidController()
+        public EmptyController()
         {
            
         }

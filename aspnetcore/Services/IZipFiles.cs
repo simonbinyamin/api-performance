@@ -4,6 +4,6 @@ namespace aspnetcore.Services
 {
     public interface IZipFiles
     {
-        Task<ActionResult> CompressFilesAsync();
+        Task<ActionResult> CompressFiles();
     }
 }

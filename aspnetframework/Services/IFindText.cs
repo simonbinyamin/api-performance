@@ -6,8 +6,6 @@ namespace aspnetframework.Services
     public interface IFindText
     {
         ActionResult FindTheWordMuch();
-        string PropertyFromObject();
-        string StudentToString();
        
     }
 }

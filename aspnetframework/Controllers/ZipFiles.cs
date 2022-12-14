@@ -12,20 +12,17 @@ namespace aspnetframework.Controllers
 {
     public class ZipFilesController : ApiController
     {
-        private readonly IZipFiles _zipFiles;
+        public readonly IZipFiles _zipFiles;
 
         public ZipFilesController()
         {
             _zipFiles = new ZipFiles();
         }
-        public string GetAsync()
+        public string Get()
         {
-           var t = _zipFiles.CompressFilesAsync();
-            return "";
+           _zipFiles.CompressFiles();
+            return "Created";
         }
-
-
-
 
     }
 }

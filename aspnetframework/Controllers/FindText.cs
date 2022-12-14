@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace aspnetframework.Controllers
 {
@@ -19,8 +20,8 @@ namespace aspnetframework.Controllers
 
         public string Get()
         {
-            var r =_findText.FindTheWordMuch();
-            return "value2";
+            _findText.FindTheWordMuch();
+            return "Replaced";
         }
 
 

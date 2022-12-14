@@ -13,8 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IInMemoryFiltering, InMemoryFiltering>();
 builder.Services.AddScoped<IZipFiles, ZipFiles>();
 builder.Services.AddScoped<IFindText, FindText>();
-
-
+builder.Services.AddScoped<IStudentSerializer, StudentSerializer>();
+builder.Services.AddScoped<IReflectionReader, ReflectionReader>();
 
 
 var app = builder.Build();

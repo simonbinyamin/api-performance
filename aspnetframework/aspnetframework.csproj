@@ -175,7 +175,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\VoidController.cs" />
+    <Compile Include="Controllers\EmptyController.cs" />
     <Compile Include="Controllers\ObjectReflection.cs" />
     <Compile Include="Controllers\StudentSerializer.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -191,7 +191,11 @@
     <Compile Include="Services\IFindText.cs" />
     <Compile Include="Services\IInMemoryFiltering.cs" />
     <Compile Include="Services\InMemoryFiltering.cs" />
+    <Compile Include="Services\IReflectionReader.cs" />
+    <Compile Include="Services\IStudentSerializer.cs" />
     <Compile Include="Services\IZipFiles.cs" />
+    <Compile Include="Services\ReflectionReader.cs" />
+    <Compile Include="Services\StudentSerializer.cs" />
     <Compile Include="Services\ZipFiles.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -203,6 +207,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="huge.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
@@ -244,6 +251,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="testcase-output\b4a34e83-544a-431b-99ae-6f38a21a6919.zip" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

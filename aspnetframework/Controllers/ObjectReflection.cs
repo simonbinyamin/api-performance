@@ -11,17 +11,17 @@ namespace aspnetframework.Controllers
 {
     public class ObjectReflectionController : ApiController
     {
-        private readonly IFindText _findText;
+        private readonly IReflectionReader _reflectionReader;
         public ObjectReflectionController()
         {
-            _findText = new FindText();
+            _reflectionReader = new ReflectionReader();
 
         }
 
         public string Get()
         {
-            var obj = _findText.PropertyFromObject();
-            return obj;
+            var objectvar = _reflectionReader.PropertyFromObject();
+            return objectvar;
         }
 
 
