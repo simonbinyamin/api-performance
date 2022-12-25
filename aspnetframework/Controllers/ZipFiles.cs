@@ -1,6 +1,7 @@
 ﻿using aspnetframework.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,8 +21,10 @@ namespace aspnetframework.Controllers
         }
         public string Get()
         {
-           _zipFiles.CompressFiles();
-            return "Created";
+            _zipFiles.CompressFiles();
+
+            return "zipped";
+
         }
 
     }

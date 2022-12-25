@@ -18,10 +18,10 @@ namespace aspnetframework.Controllers
 
         }
 
-        public string Get()
+        public List<string> Get()
         {
-            var student = _studentSerializer.StudentToString();
-            return student;
+            var students = _studentSerializer.StudentToString();
+            return students;
         }
 
 

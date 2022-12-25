@@ -8,6 +8,6 @@ namespace common
 {
     public interface IStudentSerializer
     {
-        string StudentToString();
+        List<string> StudentToString();
     }
 }

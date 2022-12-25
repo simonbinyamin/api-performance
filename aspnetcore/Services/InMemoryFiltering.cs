@@ -42,10 +42,10 @@ namespace common
 
         }
 
-        private Student[] GenerateRandomStudents()
+        public static Student[] GenerateRandomStudents()
         {
-            var students = new Student[100];
-            for (int i = 0; i < 100; i++)
+            var students = new Student[5000];
+            for (int i = 0; i < 5000; i++)
             {
                 students[i] = new Student
                 {

@@ -1,5 +1,7 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using common;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -9,7 +11,7 @@ namespace aspnetframework.Services
     public class ReflectionReader: IReflectionReader
     {
         private static string resultContent = String.Empty;
-        public string PropertyFromObject()
+        public Dictionary<int, string> PropertyFromObject()
         {
             if (string.IsNullOrEmpty(resultContent))
             {
@@ -31,20 +33,27 @@ namespace aspnetframework.Services
             }
 
             var jobject = JObject.Parse(resultContent);
-            var getName = jobject?["results"]?["name"];
 
+            JArray jarray = (JArray)jobject["results"];
 
-            dynamic student = new
+            IList<Student> students = jarray.ToObject<IList<Student>>();
+
+            Dictionary<int, string> properties = new Dictionary<int, string>();
+
+            for (int i = 0; i < students.Count; i++)
             {
-                name = getName.ToString(),
+                dynamic dynStudent = new
+                {
+                    name = students[i].name.ToString(),
+                };
+                PropertyInfo property = dynStudent.GetType().GetProperty("name");
+                var propetyName = property.Name;
+                var propetyValue = dynStudent.GetType().GetProperty(property.Name).GetValue(dynStudent, null);
+                string propetyvaluestring = propetyValue.ToString();
+                properties.Add(i, propetyvaluestring);
+            }
 
-            };
-
-            PropertyInfo property = student.GetType().GetProperty("name");
-            var PropetyName = property.Name;
-            var PropetyValue = student.GetType().GetProperty(property.Name).GetValue(student, null);
-            return PropetyValue.ToString();
-
+            return properties;
 
         }
     }

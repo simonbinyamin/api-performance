@@ -12,7 +12,8 @@ namespace common
    public class StudentSerializer: IStudentSerializer
     {
         private static string resultContent = String.Empty;
-        public string StudentToString()
+
+        public List<string> StudentToString()
         {
 
             if (string.IsNullOrEmpty(resultContent))
@@ -35,32 +36,33 @@ namespace common
             }
 
             string serializedstudent = "";
-            Student student;
-
 
             var jobject = JObject.Parse(resultContent);
-            var getName = jobject?["results"]?["name"];
-            var getEmail = jobject?["results"]?["email"];
 
-            student = new Student
+            JArray jarray = (JArray)jobject["results"];
+
+            IList<Student> students = jarray.ToObject<IList<Student>>();
+
+            List<string> serializedstudents = new List<string>();
+
+            foreach (var student in students)
             {
-                email = getEmail.ToString(),
-                name = getName.ToString(),
-
-            };
-
-            if (jobject != null)
-            {
-                var studentString = JsonSerializer.Serialize(student);
-
-                if (!string.IsNullOrEmpty(studentString))
+                if (jobject != null)
                 {
-                    serializedstudent = studentString;
+                    var studentString = JsonSerializer.Serialize(student);
+
+                    if (!string.IsNullOrEmpty(studentString))
+                    {
+                        serializedstudent = studentString;
+                    }
+
                 }
+
+                serializedstudents.Add(serializedstudent);
 
             }
 
-            return serializedstudent;
+            return serializedstudents;
 
         }
     }

@@ -8,6 +8,6 @@ namespace aspnetframework.Services
 {
     public interface IReflectionReader
     {
-        string PropertyFromObject();
+        Dictionary<int, string> PropertyFromObject();
     }
 }

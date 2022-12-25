@@ -8,6 +8,6 @@ namespace aspnetframework.Services
 {
     public interface IStudentSerializer
     {
-        string StudentToString();
+        List<string> StudentToString();
     }
 }

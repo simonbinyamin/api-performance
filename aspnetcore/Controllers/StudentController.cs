@@ -2,6 +2,8 @@
 using common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace aspnetcore.Controllers
 {
@@ -27,13 +29,16 @@ namespace aspnetcore.Controllers
 
 
         [HttpGet("Empty")]
-        public bool Empty() { return true; }
+        public bool Empty() {
+            return true;
+        }
 
 
         [HttpGet("GetStudents")]
         public List<Student> GetStudents()
         {
             var students = _inMemoryFiltering.GetFilteredStudents();
+           
             return students;
 
         }
@@ -41,8 +46,10 @@ namespace aspnetcore.Controllers
         [HttpGet("FindText")]
         public string FindText()
         {
-            _findText.FindTheWordMuch();
-            return "Replaced";
+
+            _findText.FindTheWordMuch();     
+            
+            return "Found";
 
         }
 
@@ -50,25 +57,29 @@ namespace aspnetcore.Controllers
         public string ZipFiles()
         {
             _zipFiles.CompressFiles();
-            return "Created";
+
+            return "zipped";
 
         }
 
 
         [HttpGet("ObjectReflection")]
-        public string ObjectReflection()
+        public Dictionary<int, string> ObjectReflection()
         {
-            var prop = _reflectionReader.PropertyFromObject();
-            return prop;
+            var props = _reflectionReader.PropertyFromObject();
+
+            return props;
 
         }
 
 
         [HttpGet("StudentSerializer")]
-        public string StudentSerializer()
+        public List<string> StudentSerializer()
         {
-            var student = _studentSerializer.StudentToString();
-            return student;
+            
+            var students = _studentSerializer.StudentToString();
+
+            return students;
 
         }
 

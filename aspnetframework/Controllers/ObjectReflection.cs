@@ -18,11 +18,12 @@ namespace aspnetframework.Controllers
 
         }
 
-        public string Get()
+        public Dictionary<int, string> Get()
         {
-            var objectvar = _reflectionReader.PropertyFromObject();
-            return objectvar;
+            var props = _reflectionReader.PropertyFromObject();
+            return props;
         }
+
 
 
 

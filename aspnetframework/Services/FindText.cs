@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -23,7 +24,6 @@ namespace aspnetframework.Services
                     {
 
                         int index = line.IndexOf("Much");
-
                         if (index != -1)
                         {
                             word = line.Substring(index, 5);
@@ -45,7 +45,5 @@ namespace aspnetframework.Services
             }
 
         }
-
-
     }
 }

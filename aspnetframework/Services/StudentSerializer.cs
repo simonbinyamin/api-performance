@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -18,7 +19,7 @@ namespace aspnetframework.Services
    public class StudentSerializer: IStudentSerializer
     {
         private static string resultContent = String.Empty;
-        public string StudentToString()
+        public List<string> StudentToString()
         {
 
             if (string.IsNullOrEmpty(resultContent))
@@ -41,40 +42,42 @@ namespace aspnetframework.Services
             }
 
             string serializedstudent = "";
-            Student student;
-
 
             var jobject = JObject.Parse(resultContent);
-            var getName = jobject?["results"]?["name"];
-            var getEmail = jobject?["results"]?["email"];
 
-            student = new Student
-            {
-                email = getEmail.ToString(),
-                name = getName.ToString(),
+            JArray jarray = (JArray)jobject["results"];
 
-            };
+            IList<Student> students = jarray.ToObject<IList<Student>>();
 
-            if (jobject != null)
+            List<string> serializedstudents = new List<string>();
+
+            foreach (var student in students)
             {
 
-                string studentString = "";
-                using (var ms = new MemoryStream())
+                if (jobject != null)
                 {
-                    DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(Student));
-                    serialiser.WriteObject(ms, student);
-                    byte[] json = ms.ToArray();
-                    studentString = Encoding.UTF8.GetString(json, 0, json.Length);
+
+                    string studentString = "";
+                    using (var ms = new MemoryStream())
+                    {
+                        DataContractJsonSerializer serialiser = new DataContractJsonSerializer(typeof(Student));
+                        serialiser.WriteObject(ms, student);
+                        byte[] json = ms.ToArray();
+                        studentString = Encoding.UTF8.GetString(json, 0, json.Length);
+                    }
+
+                    if (!string.IsNullOrEmpty(studentString))
+                    {
+                        serializedstudent = studentString;
+                    }
+
                 }
 
-                if (!string.IsNullOrEmpty(studentString))
-                {
-                    serializedstudent = studentString;
-                }
+                serializedstudents.Add(serializedstudent);
 
             }
 
-            return serializedstudent;
+            return serializedstudents;
 
         }
     }
