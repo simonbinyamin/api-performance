@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.Text;
 
 namespace aspnetcore.Services
@@ -34,7 +35,7 @@ namespace aspnetcore.Services
                     }
                 }
 
-       
+                Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
                 return new StatusCodeResult(200);
             }
             catch (FileNotFoundException)

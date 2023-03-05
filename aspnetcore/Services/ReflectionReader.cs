@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.Net;
 using System.Reflection;
 
@@ -49,7 +50,7 @@ namespace common
                 string propetyvaluestring = propetyValue.ToString();
                 properties.Add(i, propetyvaluestring);
             }
-
+            Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
             return properties;
 
 

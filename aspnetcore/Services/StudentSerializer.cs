@@ -1,6 +1,7 @@
 ﻿using common;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -61,7 +62,7 @@ namespace common
                 serializedstudents.Add(serializedstudent);
 
             }
-
+            Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
             return serializedstudents;
 
         }

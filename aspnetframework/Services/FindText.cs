@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Web.Mvc;
 
 namespace aspnetframework.Services
@@ -36,8 +37,9 @@ namespace aspnetframework.Services
 
                     } 
                 }
-
+                Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
                 return httpStatusCodeResult = new HttpStatusCodeResult(200, "Replaced");
+
             }
             catch (FileNotFoundException e)
             {

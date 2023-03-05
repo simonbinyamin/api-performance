@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
@@ -42,6 +43,7 @@ namespace aspnetframework.Services
 
                 try
                 {
+                    Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
                     return new FileContentResult(compressedFileStream.ToArray(), "application/zip") { FileDownloadName = _id + ".zip" };
 
                 }

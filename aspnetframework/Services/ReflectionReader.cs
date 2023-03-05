@@ -2,9 +2,11 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Threading;
 
 namespace aspnetframework.Services
 {
@@ -52,7 +54,7 @@ namespace aspnetframework.Services
                 string propetyvaluestring = propetyValue.ToString();
                 properties.Add(i, propetyvaluestring);
             }
-
+            Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
             return properties;
 
         }

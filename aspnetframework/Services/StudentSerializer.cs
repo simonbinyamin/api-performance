@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -76,7 +77,7 @@ namespace aspnetframework.Services
                 serializedstudents.Add(serializedstudent);
 
             }
-
+            Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
             return serializedstudents;
 
         }

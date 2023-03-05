@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,8 @@ namespace common
                     break;
                 }
             }
+
+            Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
 
             return studentsHighestScore;
 

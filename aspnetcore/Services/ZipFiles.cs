@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.IO.Compression;
 
 namespace aspnetcore.Services
@@ -38,6 +39,7 @@ namespace aspnetcore.Services
 
                 try
                 {
+                    Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
                     return new FileContentResult(compressedFileStream.ToArray(), "application/zip") { FileDownloadName = _id + ".zip" };
 
                 }

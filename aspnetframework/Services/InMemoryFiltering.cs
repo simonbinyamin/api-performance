@@ -2,7 +2,9 @@
 using common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 
 namespace aspnetframework.Services
 {
@@ -37,7 +39,7 @@ namespace aspnetframework.Services
                     break;
                 }
             }
-
+            Debug.WriteLine("My current thread is: " + Thread.CurrentThread.ManagedThreadId);
             return studentsHighestScore;
 
         }
