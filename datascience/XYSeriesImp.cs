@@ -38,64 +38,66 @@ namespace datascience
 
 
 
-            var barSeries = new BarSeries() {
-            
-            IsStacked = true,
-                StrokeThickness = 1,
-                
-            };
-
-            //barSeries.ItemsSource = new List<BarItem>(new[]
-            //        {
-            //            new BarItem{ Value = 1,Color= OxyColor.FromArgb(50, 0, 0, 0)},
-            //            new BarItem{ Value = 2,Color= OxyColor.FromArgb(50, 0, 0, 0) },
-            //            new BarItem{ Value = 1,Color= OxyColor.FromArgb(50, 0, 0, 0) },
-
-            //            new BarItem{ Value = 2,Color= OxyColor.FromArgb(100, 2, 0, 0)},
-            //            new BarItem{ Value = 3,Color= OxyColor.FromArgb(100, 2, 0, 0) },
-            //            new BarItem{ Value = 2,Color= OxyColor.FromArgb(100, 2, 0, 0) },
-
-            //        });
 
 
-            List<BarItem> barItems = new List<BarItem>();
+
+
+            var barSeries10 = new BarSeries(){IsStacked = true,StrokeThickness = 1,StrokeColor = OxyColors.Blue};
+            var barSeries100 = new BarSeries() { IsStacked = true, StrokeThickness = 1, StrokeColor = OxyColors.Red };
+            var barSeries1000 = new BarSeries() { IsStacked = true, StrokeThickness = 1, StrokeColor = OxyColors.Purple };
+            var barSeries2000 = new BarSeries() { IsStacked = true, StrokeThickness = 1, StrokeColor = OxyColors.DarkRed };
+
+
+
+
+
+
+            List<BarItem> barItems10 = new List<BarItem>();
+            List<BarItem> barItems100 = new List<BarItem>();
+            List<BarItem> barItems1000 = new List<BarItem>();
+            List<BarItem> barItems2000 = new List<BarItem>();
+
+            int cin = 0;
             foreach (var item in _metric.VUs10)
             {
-                barItems.Add(new BarItem { Value = item, Color = OxyColor.FromArgb(50, 0, 0, 0) });
+                barItems10.Add(new BarItem { Value = item, CategoryIndex = cin});
+                cin++;
             }
 
             foreach (var item in _metric.VUs100)
             {
-                barItems.Add(new BarItem { Value = item, Color = OxyColor.FromArgb(50, 0, 0, 0) });
+                barItems100.Add(new BarItem { Value = item, CategoryIndex = cin });
+                cin++;
             }
+
 
             foreach (var item in _metric.VUs1000)
             {
-                barItems.Add(new BarItem { Value = item, Color = OxyColor.FromArgb(50, 0, 0, 0) });
+                barItems1000.Add(new BarItem { Value = item, CategoryIndex = cin });
+                cin++;
             }
+
+
 
             foreach (var item in _metric.VUs2000)
             {
-                barItems.Add(new BarItem { Value = item, Color = OxyColor.FromArgb(50, 0, 0, 0) });
+                barItems2000.Add(new BarItem { Value = item, CategoryIndex = cin });
+                cin++;
             }
 
 
 
-            barSeries.ItemsSource = new List<BarItem>(barItems);
+            barSeries10.ItemsSource = new List<BarItem>(barItems10);
+            barSeries100.ItemsSource = new List<BarItem>(barItems100);
+            barSeries1000.ItemsSource = new List<BarItem>(barItems1000);
+            barSeries2000.ItemsSource = new List<BarItem>(barItems2000);
 
 
-
-           // barSeries.LabelPlacement = LabelPlacement.Inside;
-
- 
-
-
-
-
-
-            model.Series.Add(barSeries);
-
-
+            
+            model.Series.Add(barSeries10);
+            model.Series.Add(barSeries100);
+            model.Series.Add(barSeries1000);
+            model.Series.Add(barSeries2000);
 
             model.Axes.Add(new CategoryAxis
             {
@@ -104,14 +106,59 @@ namespace datascience
               
 
                  //MinorStep = 100,
-                Title = "Response time (ms)",
+                Title = "Elapsed time",
                 AxisTitleDistance = 16,
+                FontSize = 20,
                 TickStyle = TickStyle.Crossing,
                 Position = AxisPosition.Left,
                 Key = "CakeAxis",
                  ItemsSource = _metric.Elpesedtimes.ToArray()
 
             });
+            model.Axes.Add(new LinearAxis
+            {
+
+                Position = AxisPosition.Bottom,
+                Title = "Request handling capability",
+                TickStyle = TickStyle.None,
+                FontSize = 20,
+                AxisTitleDistance = 16,
+                AbsoluteMaximum = 400,
+                AbsoluteMinimum = 0,
+
+
+
+
+            });
+
+
+            model.Legends.Add(new Legend()
+            {
+                LegendMargin = -45,
+                LegendPadding = 45,
+                LegendLineSpacing = 6,
+                LegendPosition = LegendPosition.TopCenter,
+            });
+
+
+            model.Series.Add(new LineSeries
+            {
+
+
+                Color = OxyColors.Blue,
+                Title = ".NET Framework 4.8"
+            });
+
+            model.Series.Add(new LineSeries
+            {
+
+                Color = OxyColors.Red,
+                Title = ".NET 6"
+            });
+
+
+
+
 
 
 
