@@ -39,53 +39,51 @@ namespace datascience
             plot.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-                MajorStep = 1,
+                MajorStep = 25,
                // MajorStep = 20,
-                MinorStep = 0.25,
-               // MinorStep = 1,
+               // MinorStep = 0.25,
+                MinorStep = 4,
                 Title = "Response time (ms)",
                 AxisTitleDistance = 16,
                 TickStyle = TickStyle.Crossing,
 
                 ////empty
-                //Maximum = 6,
-                //AbsoluteMaximum = 9.5,
-                //AbsoluteMinimum = -1.25,
+                //Maximum = 26,
+                //AbsoluteMaximum = 14.5,
+                //AbsoluteMinimum = 0,
+                //Minimum = 0
 
                 //zip
-                AbsoluteMaximum = 27,
-                AbsoluteMinimum = 5,
+                //AbsoluteMaximum = 56,
+                //AbsoluteMinimum = 0,
+                //Minimum = 0,
 
-                ////find
-                //Maximum = 12,
+                //////find
+                //Maximum = 22,
 
                 ////AbsoluteMaximum = 9.5,
                 //AbsoluteMinimum = 0,
+                //Minimum = 0,
 
 
                 //getstudent
-                //Maximum = 30.02,
+                //Maximum = 44.02,
                 ////AbsoluteMaximum = 60,
                 //AbsoluteMinimum = 0,
+                //Minimum = 0,
 
                 //obj
-                //AbsoluteMaximum = 36,
-                //AbsoluteMinimum = 20.5,
+                //Maximum = 255,
+                ////AbsoluteMaximum = 70,
+
+                //Minimum = 0,
 
                 //serlizer
 
-                //AbsoluteMaximum = 47,
-                //AbsoluteMinimum = 20.5,
+                AbsoluteMaximum = 47,
+                AbsoluteMinimum = 20.5,
 
-                //thoguput
-                //Maximum = 24,
-                ////AbsoluteMaximum = 10,
-                //AbsoluteMinimum = 0,
 
-                //recevierd empty
-                //Maximum = 1600,
-                //           //AbsoluteMaximum = 10,
-                //           AbsoluteMinimum = 12,
             });
 
             plot.Axes.Add(new CategoryAxis
@@ -227,6 +225,7 @@ namespace datascience
             {
                 var exporter = new OxyPlot.SvgExporter
                 {
+
                     Width = 400,
                     Height = 300,
                     UseVerticalTextAlignmentWorkaround = true

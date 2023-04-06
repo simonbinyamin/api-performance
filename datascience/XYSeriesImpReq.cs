@@ -15,13 +15,13 @@ namespace datascience
 {
 
 
-    public class XYSeriesImp
+    public class XYSeriesImpReq
     {
         XYMetric _metric;
 
 
 
-        public XYSeriesImp(XYMetric metric)
+        public XYSeriesImpReq(XYMetric metric)
         {
             _metric = metric;
 
@@ -102,20 +102,24 @@ namespace datascience
             model.Axes.Add(new CategoryAxis
             {
                 //empty
-                MajorStep = _metric.Elpesedtimes.Count/16,
+                MajorStep = _metric.Elpesedtimes.Count/5,
                 //MinorStep = 250,
                 
                 //AbsoluteMaximum = _metric.Elpesedtimes.Count+500,
                // Maximum = _metric.Elpesedtimes.Count+500,
                 //Minimum = 1-10,
 
-                Title = "Elapsed time",
-               AxisTitleDistance = 70,
-                FontSize = 30,
+                Title = " ",
+               AxisTitleDistance = 20,
+                FontSize = 40,
+                
                 TickStyle = TickStyle.None,
                 Position = AxisPosition.Left,
-                Key = "CakeAxis",
+                //Key = "CakeAxis",
                 ItemsSource = _metric.Elpesedtimes.ToArray(),
+        
+                //AxisTickToLabelDistance = 300,
+           
                 
                 //MaximumDataMargin = _metric.Elpesedtimes.Count - (_metric.Elpesedtimes.Count-550),
                 //  Maximum = _metric.Elpesedtimes.Count - 550,
@@ -129,39 +133,19 @@ namespace datascience
                 Position = AxisPosition.Bottom,
 
               
-                Title = "Latency (ms)",
-                TickStyle = TickStyle.None,
-                FontSize = 30,
-                AxisTitleDistance = 40,
+                Title = "request/sec",
+                TickStyle = TickStyle.Crossing,
+                FontSize = 40,
+                AxisTitleDistance = 60,
+
+                AxisDistance=10,
                 //empty
-                //AbsoluteMaximum = 500,
-                //Maximum = 450,
-                //MajorStep = 60,
+                MajorStep = 20,
+                MinorStep = 5,
+                AbsoluteMaximum = 50,
+                Maximum = 40,
 
-                //getst
-                //MajorStep = 120,
-                //AbsoluteMaximum = 1000,
-                //Maximum = 900,
-                //find
-                //MajorStep = 80,
-                //AbsoluteMaximum = 700,
-                //Maximum = 600,
-                //zip
-                //MajorStep = 140,
-                //AbsoluteMaximum = 1200,
-                //Maximum = 1100,
-                //object
-                //MajorStep = 112,
-                //AbsoluteMaximum = 950,
-                //Maximum = 850,
-
-                //ser
-                MajorStep = 154,
-                AbsoluteMaximum = 1300,
-                Maximum = 1200,
                 AbsoluteMinimum = 0,
-
-
 
 
             });
@@ -173,31 +157,40 @@ namespace datascience
 
                
 
-                LegendFontSize = 30,
-                //LegendMargin = -65,
-                //LegendPadding = 65,
-                LegendLineSpacing = 4,
-                LegendPosition = LegendPosition.BottomRight,
-                //LegendBackground = OxyColors.Black
-                //LegendPlacement = LegendPlacement.Outside,
+                LegendFontSize = 40,
+                FontSize = 40,
+                //LegendMargin = 100,
+                LegendTitleFontSize = 40,
+                
+               
+                ////LegendPadding = 65,
+                LegendLineSpacing = 40,
+               
+                
+                LegendPosition = LegendPosition.RightMiddle,
+                ////LegendBackground = OxyColors.Black
+                LegendPlacement = LegendPlacement.Outside,
                 
             });
 
 
             model.Series.Add(new LineSeries
             {
-
+              
 
                 Color = OxyColors.DarkRed,
+           
                 Title = "10VU  ",
     
             });
 
             model.Series.Add(new LineSeries
             {
+                
 
                 Color = OxyColors.SkyBlue,
-                Title = "100VU  ",
+    
+                Title = "100VU    ",
 
             });
 
@@ -205,17 +198,21 @@ namespace datascience
             model.Series.Add(new LineSeries
             {
 
-
+       
                 Color = OxyColors.Red,
-                Title = "1000VU s  ",
+ 
+                Title = "1000VU       ",
       
             });
 
             model.Series.Add(new LineSeries
             {
-
+              
+                
                 Color = OxyColors.Blue,
-                Title = "2000VU s  ",
+               
+
+                Title = "2000VU       ",
 
             });
 
@@ -241,7 +238,7 @@ namespace datascience
                 //Console.WriteLine(t);
 
 
-                 File.WriteAllText(@"C:\Users\Simon\Desktop\hej\serlizerc.svg", t);
+                 File.WriteAllText(@"C:\Users\Simon\Desktop\hej\XXX.svg", t);
 
             }
 

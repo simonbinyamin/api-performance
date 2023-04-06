@@ -1,23 +1,41 @@
 ﻿using datascience;
 using System.Globalization;
 
-public class Program2
+public class RequestProgram
 {
     public static void Main(string[] args)
     {
 
 
 
-     
-        CreateXY(@"C:\Users\Simon\Desktop\hej\emptyf_LatenciesOverTime.csv");
+
+       CreateXY(@"C:\Users\Simon\Desktop\hej\emptyf_TransactionsPerSecond.csv");
+        // CreateXY(@"C:\Users\Simon\Desktop\hej\emptyc_TransactionsPerSecond.csv");
+
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\getstudnsf_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\getstudentsc_TransactionsPerSecond.csv");
 
 
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\findf_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\findc2_TransactionsPerSecond.csv");
+
+
+         //CreateXY(@"C:\Users\Simon\Desktop\hej\zipf2_TransactionsPerSecond.csv");
+
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\zipc_TransactionsPerSecond.csv");
+
+
+       // CreateXY(@"C:\Users\Simon\Desktop\hej\objrctf_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\objectc2_TransactionsPerSecond.csv");
+
+        // CreateXY(@"C:\Users\Simon\Desktop\hej\serlizerf3_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\studentserlizerc_TransactionsPerSecond.csv");
 
 
     }
 
 
-   
+
 
 
 
@@ -47,8 +65,10 @@ public class Program2
 
                 if (!String.IsNullOrEmpty(values[0]))
                 {
+                    int index = values[0].LastIndexOf(",");
 
-                    metric.Elpesedtimes.Add(values[0]);
+                    var input = values[0].Substring(0, index);
+                    metric.Elpesedtimes.Add(input);
             
                 }
                 if (!String.IsNullOrEmpty(values[1]))
@@ -82,7 +102,7 @@ public class Program2
         }
 
 
-        XYSeriesImp XYPlotSeries = new(metric);
+        XYSeriesImpReq XYPlotSeries = new(metric);
         XYPlotSeries.createBoxPlot();
 
     }

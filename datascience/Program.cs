@@ -1,14 +1,19 @@
 ﻿using datascience;
+using datascience.ttest;
 using System.Globalization;
 
 public class Program
 {
-    public static void Main2(string[] args)
+    public static void Mainas(string[] args)
     {
 
         //var frame = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\emptyf.jtl");
 
         //var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\emptyc.jtl");
+
+
+
+
 
         //var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\emptyf.jtl", 0.99);
 
@@ -18,6 +23,9 @@ public class Program
         //var frame = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\findf.jtl");
 
         //var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\findc2.jtl");
+
+
+
 
         //var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\findf.jtl", 0.99);
 
@@ -30,6 +38,8 @@ public class Program
 
         //var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\getstudentsc.jtl");
 
+
+
         //var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\getstudnsf.jtl", 0.99);
 
         //var core99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\getstudentsc.jtl", 0.99);
@@ -40,19 +50,30 @@ public class Program
 
         //var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\zipc.jtl");
 
+
+
+
+
+
+
         //var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\zipf2.jtl", 0.99);
 
         //var core99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\zipc.jtl", 0.99);
 
 
 
-        var frame = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\objrctf.jtl");
+        //var frame = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\objrctf.jtl");
 
-        var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\objectc2.jtl");
+        //var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\objectc2.jtl");
 
-        var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\objrctf.jtl", 0.99);
 
-        var core99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\objectc2.jtl", 0.99);
+
+
+
+
+        //var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\objrctf.jtl", 0.99);
+
+        //var core99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\objectc2.jtl", 0.99);
 
 
 
@@ -62,32 +83,39 @@ public class Program
 
         //var core = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\studentserlizerc.jtl");
 
-        //var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\studentserlizerf3.jtl", 0.95);
-
-        //var core99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\studentserlizerc.jtl", 0.95);
-
-
-
+        //ttest.doCalc(core.ResponseTime10.ToArray(), frame.ResponseTime10.ToArray(), "Serializer 10VUs");
+        //ttest.doCalc(core.ResponseTime100.ToArray(), frame.ResponseTime100.ToArray(), "Serializer 100VUs");
+        //ttest.doCalc(core.ResponseTime1000.ToArray(), frame.ResponseTime1000.ToArray(), "Serializer 1000VUs");
+        //ttest.doCalc(core.ResponseTime2000.ToArray(), frame.ResponseTime2000.ToArray(), "Serializer 2000VUs");
 
 
 
+        var frame99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\frame\studentserlizerf3.jtl", 0.99);
+
+        var core99 = GetMetric(@"C:\Users\Simon\Desktop\2022-12-22new\core\studentserlizerc.jtl", 0.99);
 
 
 
 
-        var te = GenerateTable(core, frame, core99, frame99, 0.99);
-        var result = "";
-
-        foreach (var item in te)
-        {
-            result += item + Environment.NewLine;
-        }
 
 
-        File.WriteAllText(@"C:\Users\Simon\Desktop\2022-12-22new\core\output\serlizer.csv", result);
 
 
-        //CreateBox(core99, frame99);
+
+
+        //var te = GenerateTable(core, frame, core99, frame99, 0.99);
+        //var result = "";
+
+        //foreach (var item in te)
+        //{
+        //    result += item + Environment.NewLine;
+        //}
+
+
+        //File.WriteAllText(@"C:\Users\Simon\Desktop\2022-12-22new\core\output\serlizer.csv", result);
+
+
+        CreateBox(core99, frame99);
 
 
 
