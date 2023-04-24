@@ -1,35 +1,35 @@
 ﻿using datascience;
 using System.Globalization;
 
-public class RequestProgram
+public class LatencyProgramOBSELETE
 {
-    public static void Main(string[] args)
+    public static void Mainsss(string[] args)
     {
 
 
 
 
-       CreateXY(@"C:\Users\Simon\Desktop\hej\emptyf_TransactionsPerSecond.csv");
-        // CreateXY(@"C:\Users\Simon\Desktop\hej\emptyc_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\emptyf_LatenciesOverTime.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\emptyc_LatenciesOverTime.csv");
 
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\getstudnsf_TransactionsPerSecond.csv");
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\getstudentsc_TransactionsPerSecond.csv");
-
-
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\findf_TransactionsPerSecond.csv");
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\findc2_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\getstudnsf_LatenciesOverTime.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\getstudentsc_LatenciesOverTime.csv");
 
 
-         //CreateXY(@"C:\Users\Simon\Desktop\hej\zipf2_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\findf_LatenciesOverTime.csv");
+       // CreateXY(@"C:\Users\Simon\Desktop\hej\findc2_LatenciesOverTime.csv");
 
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\zipc_TransactionsPerSecond.csv");
+
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\zipf2_LatenciesOverTime.csv");
+
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\zipc_LatenciesOverTime.csv");
 
 
-       // CreateXY(@"C:\Users\Simon\Desktop\hej\objrctf_TransactionsPerSecond.csv");
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\objectc2_TransactionsPerSecond.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\objrctf_LatenciesOverTime.csv");
+        //CreateXY(@"C:\Users\Simon\Desktop\hej\objectc2_LatenciesOverTime.csv");
 
-        // CreateXY(@"C:\Users\Simon\Desktop\hej\serlizerf3_TransactionsPerSecond.csv");
-        //CreateXY(@"C:\Users\Simon\Desktop\hej\studentserlizerc_TransactionsPerSecond.csv");
+        // CreateXY(@"C:\Users\Simon\Desktop\hej\serlizerf3_LatenciesOverTime.csv");
+        CreateXY(@"C:\Users\Simon\Desktop\hej\studentserlizerc_LatenciesOverTime.csv");
 
 
     }
@@ -102,7 +102,7 @@ public class RequestProgram
         }
 
 
-        XYSeriesImpReq XYPlotSeries = new(metric);
+        XYSeriesImp XYPlotSeries = new(metric);
         XYPlotSeries.createBoxPlot();
 
     }

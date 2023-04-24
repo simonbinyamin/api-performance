@@ -15,12 +15,12 @@ namespace datascience
 {
 
 
-    public class BoxPlotSeriesImp
+    public class BoxPlotSeriesImpOld
     {
         Metric? _core;
         Metric? _frame;
 
-        public BoxPlotSeriesImp(Metric? core, Metric? frame)
+        public BoxPlotSeriesImpOld(Metric? core, Metric? frame)
         {
             _core = core;
             _frame = frame;
@@ -39,21 +39,21 @@ namespace datascience
             plot.Axes.Add(new LinearAxis
             {
                 Position = AxisPosition.Left,
-               // MajorStep = 25,
-                 MajorStep = 25,
-                 MinorStep = 4,
-               // MinorStep = 4,
-                Title = "Latency (ms)",
+                MajorStep = 25,
+               // MajorStep = 20,
+               // MinorStep = 0.25,
+                MinorStep = 4,
+                Title = "Response time (ms)",
                 AxisTitleDistance = 16,
                 TickStyle = TickStyle.Crossing,
 
                 ////empty
-                Maximum = 26,
-                AbsoluteMaximum = 14.5,
-                AbsoluteMinimum = 0,
-                Minimum = 0
+                //Maximum = 26,
+                //AbsoluteMaximum = 14.5,
+                //AbsoluteMinimum = 0,
+                //Minimum = 0
 
-                ////zip
+                //zip
                 //AbsoluteMaximum = 56,
                 //AbsoluteMinimum = 0,
                 //Minimum = 0,
@@ -66,24 +66,23 @@ namespace datascience
                 //Minimum = 0,
 
 
-                ////getstudent
+                //getstudent
                 //Maximum = 44.02,
                 ////AbsoluteMaximum = 60,
                 //AbsoluteMinimum = 0,
                 //Minimum = 0,
 
                 //obj
-                //Maximum = 260,
-                //AbsoluteMaximum = 70,
+                //Maximum = 255,
+                ////AbsoluteMaximum = 70,
 
-
+                //Minimum = 0,
 
                 //serlizer
 
-                //AbsoluteMaximum = 47,
-                //AbsoluteMinimum = 20.5,
-                //AbsoluteMinimum = 0,
-                //Minimum = 0,
+                AbsoluteMaximum = 47,
+                AbsoluteMinimum = 20.5,
+
 
             });
 
@@ -154,20 +153,30 @@ namespace datascience
 
 
 
-            GetBar(0, _frame.Latency10, "blue");
-            GetBar(1, _core.Latency10, "red");
+            GetBar(0, _frame.ResponseTime10, "blue");
+            GetBar(1, _core.ResponseTime10, "red");
 
-            GetBar(2, _frame.Latency100, "blue");
-            GetBar(3, _core.Latency100, "red");
+            GetBar(2, _frame.ResponseTime100, "blue");
+            GetBar(3, _core.ResponseTime100, "red");
 
-            GetBar(4, _frame.Latency1000, "blue");
-            GetBar(5, _core.Latency1000, "red");
+            GetBar(4, _frame.ResponseTime1000, "blue");
+            GetBar(5, _core.ResponseTime1000, "red");
 
-            GetBar(6, _frame.Latency2000, "blue");
-            GetBar(7, _core.Latency2000, "red");
+            GetBar(6, _frame.ResponseTime2000, "blue");
+            GetBar(7, _core.ResponseTime2000, "red");
 
 
-      
+            //GetBar(0, _frame.Throughput10, "blue");
+            //GetBar(1, _core.Throughput10, "red");
+
+            //GetBar(2, _frame.Throughput100, "blue");
+            //GetBar(3, _core.Throughput100, "red");
+
+            //GetBar(4, _frame.Throughput1000, "blue");
+            //GetBar(5, _core.Throughput1000, "red");
+
+            //GetBar(6, _frame.Throughput2000, "blue");
+            //GetBar(7, _core.Throughput2000, "red");
 
 
 
@@ -267,7 +276,7 @@ namespace datascience
                 s1.StrokeThickness = 1.1;
                 s1.WhiskerWidth = 1;
 
-                //s1.Fill = OxyColor.FromRgb(0, 98, 255).ChangeIntensity(0.7);
+                s1.Fill = OxyColor.FromRgb(0, 98, 255).ChangeIntensity(0.7);
 
                 s1.Stroke = OxyColor.FromRgb(0, 98, 255);
 
@@ -288,7 +297,7 @@ namespace datascience
                 s2.WhiskerWidth = 1;
 
 
-                //s2.Fill = OxyColor.FromRgb(255, 8, 0).ChangeIntensity(0.9); 
+                s2.Fill = OxyColor.FromRgb(255, 8, 0).ChangeIntensity(0.9); 
 
                 s2.Stroke = OxyColor.FromRgb(255, 8, 0);
 
